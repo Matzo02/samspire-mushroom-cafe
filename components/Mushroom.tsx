@@ -37,23 +37,3 @@ export function Mushroom({ className, variant = "amanita" }: { className?: strin
     </svg>
   );
 }
-
-// A strip of mushrooms "growing" along the edge of a section
-const ROW: [Variant, number][] = [
-  ["amanita", 34], ["button", 20], ["bell", 42], ["flat", 26], ["button", 16], ["amanita", 24],
-  ["bell", 30], ["button", 22], ["flat", 38], ["amanita", 18], ["bell", 46], ["button", 18],
-  ["amanita", 30], ["flat", 22], ["bell", 26], ["button", 26], ["amanita", 40], ["flat", 18],
-  ["bell", 34], ["button", 14], ["amanita", 26], ["flat", 30], ["bell", 20], ["amanita", 36],
-];
-
-export function MushroomRow({ className = "" }: { className?: string }) {
-  return (
-    <div className={`shroom-row ${className}`} aria-hidden="true">
-      {ROW.map(([v, size], i) => (
-        <span key={i} style={{ width: size, height: size, animationDelay: `${(i % 7) * 0.4}s` }}>
-          <Mushroom variant={v} />
-        </span>
-      ))}
-    </div>
-  );
-}

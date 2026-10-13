@@ -1,19 +1,22 @@
 "use client";
 
 import { useRef, useState } from "react";
-import { MENU, TAG_LABELS, rupee, type Tag } from "@/data/menu";
+import { MENU, SIGNATURES, TAG_LABELS, rupee, type MenuCategory, type Tag } from "@/data/menu";
 
-// "veg" is the default, so only the other tags get a badge
-const badgeTags = (tags: Tag[]) => tags.filter((t) => t !== "veg");
+const CATEGORIES: MenuCategory[] = [{ id: "picks", label: "Chef's picks", items: SIGNATURES }, ...MENU];
+
+// "veg" is the default, so it gets no badge; neither does "chef" inside the Chef's picks tab
+const badgeTags = (tags: Tag[], categoryId: string) =>
+  tags.filter((t) => t !== "veg" && !(t === "chef" && categoryId === "picks"));
 
 export function MenuTabs() {
-  const [activeId, setActiveId] = useState(MENU[0].id);
-  const active = MENU.find((c) => c.id === activeId) ?? MENU[0];
+  const [activeId, setActiveId] = useState(CATEGORIES[0].id);
+  const active = CATEGORIES.find((c) => c.id === activeId) ?? CATEGORIES[0];
   const tabRefs = useRef<(HTMLButtonElement | null)[]>([]);
 
   // Arrow/Home/End move between tabs (WAI-ARIA tabs pattern)
   const onKeyDown = (e: React.KeyboardEvent, index: number) => {
-    const last = MENU.length - 1;
+    const last = CATEGORIES.length - 1;
     const next =
       e.key === "ArrowRight" ? (index === last ? 0 : index + 1)
       : e.key === "ArrowLeft" ? (index === 0 ? last : index - 1)
@@ -22,14 +25,14 @@ export function MenuTabs() {
       : null;
     if (next === null) return;
     e.preventDefault();
-    setActiveId(MENU[next].id);
+    setActiveId(CATEGORIES[next].id);
     tabRefs.current[next]?.focus();
   };
 
   return (
     <>
       <div className="tabs" role="tablist" aria-label="Menu categories">
-        {MENU.map((c, i) => (
+        {CATEGORIES.map((c, i) => (
           <button
             key={c.id}
             ref={(el) => {
@@ -53,7 +56,7 @@ export function MenuTabs() {
           <article className="item" key={it.name} style={{ animationDelay: `${i * 40}ms` }}>
             <h3>
               {it.name}
-              {badgeTags(it.tags).map((t) => (
+              {badgeTags(it.tags, active.id).map((t) => (
                 <span key={t} className={`tag tag--${t}`}>
                   {TAG_LABELS[t]}
                 </span>

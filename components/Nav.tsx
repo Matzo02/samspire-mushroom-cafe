@@ -5,23 +5,17 @@ import { Mushroom } from "./Mushroom";
 import { SITE } from "@/data/site";
 
 const LINKS = [
-  { href: "#story", label: "Our Story" },
+  { href: "#about", label: "About" },
   { href: "#menu", label: "Menu" },
-  { href: "#why", label: "Why Mushrooms" },
-  { href: "#visit", label: "Visit" },
+  { href: "#visit", label: "Find us" },
 ];
 
 export function Nav() {
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
-  const [progress, setProgress] = useState(0);
 
   useEffect(() => {
-    const onScroll = () => {
-      setScrolled(window.scrollY > 8);
-      const max = document.documentElement.scrollHeight - window.innerHeight;
-      setProgress(max > 0 ? window.scrollY / max : 0);
-    };
+    const onScroll = () => setScrolled(window.scrollY > 8);
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
@@ -30,7 +24,7 @@ export function Nav() {
   const close = () => setOpen(false);
 
   return (
-    <header className={`nav${scrolled ? " is-scrolled" : ""}`} id="top" style={{ "--progress": progress } as React.CSSProperties}>
+    <header className={`nav${scrolled ? " is-scrolled" : ""}`} id="top">
       <div className="wrap nav__inner">
         <a className="brand" href="#top" aria-label="Samspire home">
           <Mushroom className="brand__mark" />
@@ -56,11 +50,6 @@ export function Nav() {
             Book a table
           </a>
         </nav>
-      </div>
-      {/* scroll progress: a mycelium thread with a mushroom growing at its tip */}
-      <div className="mycelium" aria-hidden="true">
-        <div className="mycelium__thread" style={{ transform: `scaleX(${progress})` }} />
-        <Mushroom className="mycelium__tip" variant="button" />
       </div>
     </header>
   );
