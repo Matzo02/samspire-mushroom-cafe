@@ -54,15 +54,18 @@ export function MenuTabs() {
       <div className="menu__list" id="menu-panel" role="tabpanel" tabIndex={0} aria-labelledby={`tab-${active.id}`} key={active.id}>
         {active.items.map((it, i) => (
           <article className="item" key={it.name} style={{ animationDelay: `${i * 40}ms` }}>
-            <h3>
-              {it.name}
-              {badgeTags(it.tags, active.id).map((t) => (
-                <span key={t} className={`tag tag--${t}`}>
-                  {TAG_LABELS[t]}
-                </span>
-              ))}
-            </h3>
-            <span className="item__price">{rupee(it.price)}</span>
+            <div className="item__row">
+              <h3>
+                {it.name}
+                {badgeTags(it.tags, active.id).map((t) => (
+                  <span key={t} className={`tag tag--${t}`}>
+                    {TAG_LABELS[t]}
+                  </span>
+                ))}
+              </h3>
+              <span className="item__dots" aria-hidden="true" />
+              <span className="item__price">{rupee(it.price)}</span>
+            </div>
             <p>{it.desc}</p>
           </article>
         ))}

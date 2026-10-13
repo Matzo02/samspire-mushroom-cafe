@@ -54,7 +54,7 @@ export default function Home() {
 
         <section className="section" id="menu">
           <div className="wrap">
-            <div className="menu__head">
+            <div className="section__head">
               <h2>Menu</h2>
               <p className="muted">Around ₹800 for two</p>
             </div>
@@ -64,9 +64,14 @@ export default function Home() {
         </section>
 
         <section className="section" id="visit">
+          <div className="wrap">
+            <div className="section__head">
+              <h2>Find us</h2>
+              <p className="muted">Open till {SITE.closesAt}</p>
+            </div>
+          </div>
           <div className="wrap visit">
             <div className="visit__info">
-              <h2>Find us</h2>
               <div className="loc">
                 <h3>Baner café</h3>
                 <p>
@@ -75,7 +80,7 @@ export default function Home() {
                   ))}
                   <span className="muted">{SITE.cafe.landmark}</span>
                 </p>
-                <p>Open till {SITE.closesAt} · Free Wi-Fi</p>
+                <p>Free Wi-Fi</p>
               </div>
               <div className="loc">
                 <h3>Pawna</h3>
