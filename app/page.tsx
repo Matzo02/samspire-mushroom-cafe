@@ -1,4 +1,5 @@
-import { Mushroom } from "@/components/Mushroom";
+import { Mushroom, MushroomRow, type Variant } from "@/components/Mushroom";
+import { BackToTop, SporeBurst } from "@/components/Spores";
 import { Nav } from "@/components/Nav";
 import { MenuTabs } from "@/components/MenuTabs";
 import { SIGNATURES, rupee } from "@/data/menu";
@@ -12,11 +13,11 @@ const STEPS = [
   { n: "03", title: "Plated", text: "Cooked to order into café classics with a mushroom heart." },
 ];
 
-const BENEFITS = [
-  { icon: "💪", title: "Plant protein", text: "A meaty bite and a useful source of protein for vegetarian diets." },
-  { icon: "☀️", title: "Vitamin D", text: "One of the few non-animal foods that can provide vitamin D." },
-  { icon: "🌿", title: "Fibre-rich", text: "Naturally high in fibre and antioxidants, low in calories and fat." },
-  { icon: "🌍", title: "Low footprint", text: "Grown indoors with little land and water. Good food, lighter on the planet." },
+const BENEFITS: { icon: Variant; title: string; text: string }[] = [
+  { icon: "amanita", title: "Plant protein", text: "A meaty bite and a useful source of protein for vegetarian diets." },
+  { icon: "bell", title: "Vitamin D", text: "One of the few non-animal foods that can provide vitamin D." },
+  { icon: "flat", title: "Fibre-rich", text: "Naturally high in fibre and antioxidants, low in calories and fat." },
+  { icon: "button", title: "Low footprint", text: "Grown indoors with little land and water. Good food, lighter on the planet." },
 ];
 
 export default function Home() {
@@ -24,7 +25,7 @@ export default function Home() {
     <>
       <Nav />
       <main>
-        <section className="hero">
+        <section className="hero on-dark">
           <div className="wrap hero__grid">
             <div className="hero__copy">
               <p className="eyebrow">Baner · Pune</p>
@@ -46,18 +47,25 @@ export default function Home() {
               </ul>
             </div>
             <div className="hero__art" aria-hidden="true">
-              <div className="hero__disc" />
+              <div className="hero__moon" />
               <Mushroom className="shroom shroom--big" />
-              <Mushroom className="shroom shroom--mid" />
-              <Mushroom className="shroom shroom--small" />
-              <div className="spore s1" /><div className="spore s2" /><div className="spore s3" /><div className="spore s4" />
+              <Mushroom className="shroom shroom--mid" variant="bell" />
+              <Mushroom className="shroom shroom--small" variant="flat" />
+              <Mushroom className="shroom shroom--tiny" variant="button" />
+              {[1, 2, 3, 4, 5, 6].map((n) => (
+                <div key={n} className={`spore s${n}`} />
+              ))}
             </div>
           </div>
+          <MushroomRow className="shroom-row--cap" />
         </section>
 
         <div className="marquee" aria-hidden="true">
           <div className="marquee__track">
-            {[...VARIETIES, ...VARIETIES].flatMap((v, i) => [<span key={`v${i}`}>{v}</span>, <span key={`s${i}`}>✦</span>])}
+            {[...VARIETIES, ...VARIETIES].flatMap((v, i) => [
+              <span key={`v${i}`}>{v}</span>,
+              <Mushroom key={`m${i}`} className="marquee__shroom" variant={(["amanita", "bell", "flat", "button"] as const)[i % 4]} />,
+            ])}
           </div>
         </div>
 
@@ -90,7 +98,7 @@ export default function Home() {
           </div>
         </section>
 
-        <section className="section section--dark" id="signatures">
+        <section className="section section--dark on-dark" id="signatures">
           <div className="wrap">
             <p className="eyebrow eyebrow--light">Chef&apos;s picks</p>
             <h2>Signatures worth the drive.</h2>
@@ -105,6 +113,7 @@ export default function Home() {
               ))}
             </div>
           </div>
+          <MushroomRow className="shroom-row--paper" />
         </section>
 
         <section className="section" id="menu">
@@ -121,7 +130,7 @@ export default function Home() {
               </div>
             </div>
             <MenuTabs />
-            <p className="note">Sample menu for demo purposes. Prices are indicative and exclude taxes.</p>
+            <p className="note"><span className="glyph" />Sample menu for demo purposes. Prices are indicative and exclude taxes.</p>
           </div>
         </section>
 
@@ -132,7 +141,7 @@ export default function Home() {
             <div className="why">
               {BENEFITS.map((b) => (
                 <article key={b.title}>
-                  <div className="why__icon">{b.icon}</div>
+                  <div className="why__icon"><Mushroom variant={b.icon} /></div>
                   <h3>{b.title}</h3>
                   <p>{b.text}</p>
                 </article>
@@ -178,7 +187,7 @@ export default function Home() {
           </div>
         </section>
 
-        <section className="insta">
+        <section className="insta on-dark">
           <div className="wrap insta__inner">
             <h2>Follow the fungi.</h2>
             <p>New dishes, farm days and behind-the-scenes on Instagram.</p>
@@ -186,6 +195,7 @@ export default function Home() {
               {SITE.instagramHandle}
             </a>
           </div>
+          <MushroomRow className="shroom-row--glow" />
         </section>
       </main>
 
@@ -201,6 +211,8 @@ export default function Home() {
           <p className="muted small">Concept website, demo build.</p>
         </div>
       </footer>
+      <BackToTop />
+      <SporeBurst />
     </>
   );
 }
