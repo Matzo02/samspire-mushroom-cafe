@@ -4,11 +4,13 @@ import { MenuTabs } from "@/components/MenuTabs";
 import { SporeBurst } from "@/components/Spores";
 import { SITE } from "@/data/site";
 
-// [left %, top %, loop radius px, loop seconds, delay seconds], clustered around the small mushrooms
+const NEON = ["#3ff6ff", "#4f7dff", "#4dffc3", "#a77bff"];
+
+// [left %, top %, flight radius px, flight seconds, delay seconds], spread around the mushrooms
 const FIREFLIES: [number, number, number, number, number][] = [
-  [14, 58, 26, 7, 0], [30, 72, 18, 5.5, -2], [8, 80, 22, 8, -4],
-  [72, 56, 24, 6.5, -1], [88, 64, 20, 7.5, -3], [62, 84, 16, 5, -2.5],
-  [80, 88, 22, 6, -5], [46, 66, 28, 9, -6], [22, 46, 20, 8.5, -1.5], [94, 46, 18, 6, -4.5],
+  [14, 58, 70, 9, 0], [30, 74, 55, 7, -2], [8, 84, 60, 11, -4],
+  [72, 54, 80, 10, -1], [90, 66, 50, 8, -3], [60, 86, 45, 6.5, -2.5],
+  [82, 88, 65, 9.5, -5], [46, 64, 90, 12, -6], [22, 42, 60, 10.5, -1.5], [96, 44, 55, 8.5, -4.5],
 ];
 
 export default function Home() {
@@ -41,8 +43,10 @@ export default function Home() {
                 <span
                   key={i}
                   className="firefly"
-                  style={{ "--x": `${x}%`, "--y": `${y}%`, "--r": `${r}px`, "--dur": `${dur}s`, "--delay": `${delay}s` } as React.CSSProperties}
-                />
+                  style={{ "--x": `${x}%`, "--y": `${y}%`, "--r": `${r}px`, "--dur": `${dur}s`, "--delay": `${delay}s`, "--c": NEON[i % NEON.length] } as React.CSSProperties}
+                >
+                  <span className="firefly__light" />
+                </span>
               ))}
             </div>
           </div>
