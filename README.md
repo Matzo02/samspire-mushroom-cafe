@@ -6,26 +6,29 @@ Concept website for **Samspire – The Mushroom Café**, India's first mushroom 
 
 ## Stack
 
-Plain HTML, CSS and vanilla JS. No build step. Hosted on GitHub Pages.
+Next.js 16 (App Router, TypeScript), exported as a static site and deployed to GitHub Pages by `.github/workflows/deploy.yml` on every push to `main`.
 
 ```
-index.html          page markup
-assets/styles.css   all styles (colour tokens at the top)
-assets/main.js      menu tabs, signature cards, mobile nav
-assets/menu.js      menu data: edit this to update dishes and prices
-assets/favicon.svg
+app/layout.tsx      fonts (Fraunces + Inter) and page metadata
+app/page.tsx        the page sections
+app/globals.css     all styles (colour tokens at the top)
+app/icon.svg        favicon
+components/         Nav, MenuTabs (client components), Mushroom illustration
+data/menu.ts        menu data: edit this to update dishes and prices
+data/site.ts        links, address details, hours
 ```
 
 ## Run locally
 
 ```sh
-python3 -m http.server 8000
-# open http://localhost:8000
+npm install
+npm run dev        # http://localhost:3000
+npm run build      # static export to out/
 ```
 
 ## Updating the menu
 
-The current menu is a **sample** written for the demo. Replace the items in `assets/menu.js` with the café's real menu. Items tagged `"chef"` are shown automatically in the "Signatures" section.
+The current menu is a **sample** written for the demo. Replace the items in `data/menu.ts` with the café's real menu. Items tagged `"chef"` are shown automatically in the "Signatures" section.
 
 ## To do before going live
 
