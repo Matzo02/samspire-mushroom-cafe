@@ -121,22 +121,40 @@ p { margin: 0; }
 }
 .shroom { position: absolute; filter: drop-shadow(0 0 16px rgba(127, 212, 255, 0.4)); }
 .shroom--big { width: 56%; left: 22%; top: 14%; animation: bob 7s ease-in-out infinite; }
-.shroom--mid { width: 26%; left: 6%; bottom: 12%; animation: bob 8s ease-in-out -2s infinite; }
-.shroom--small { width: 24%; right: 4%; bottom: 16%; animation: bob 6s ease-in-out -1s infinite; }
-.shroom--tiny { width: 13%; right: 28%; bottom: 8%; animation: bob 5s ease-in-out -3s infinite; }
-.spore {
-  position: absolute; width: 6px; height: 6px; border-radius: 50%;
-  background: var(--glow); box-shadow: 0 0 10px 2px rgba(127, 212, 255, 0.7);
-  animation: drift 10s linear infinite;
-}
-.s1 { left: 30%; top: 72%; }
-.s2 { left: 62%; top: 80%; animation-delay: -3.5s; width: 4px; height: 4px; }
-.s3 { left: 78%; top: 62%; animation-delay: -7s; }
+/* the small ones dance: sway and squash from the base, each on its own beat */
+.shroom--mid, .shroom--small, .shroom--tiny { transform-origin: 50% 92%; animation: dance ease-in-out infinite; }
+.shroom--mid { width: 26%; left: 6%; bottom: 12%; animation-duration: 2.6s; }
+.shroom--small { width: 24%; right: 4%; bottom: 16%; animation-duration: 3.1s; animation-delay: -0.8s; }
+.shroom--tiny { width: 13%; right: 28%; bottom: 8%; animation-duration: 2.2s; animation-delay: -1.5s; }
 @keyframes bob { 50% { transform: translateY(-10px); } }
-@keyframes drift {
-  0% { transform: translateY(0); opacity: 0; }
-  20% { opacity: 1; }
-  100% { transform: translateY(-260px) translateX(20px); opacity: 0; }
+@keyframes dance {
+  0%, 100% { transform: rotate(0deg) scale(1, 1); }
+  15% { transform: rotate(-9deg) scale(1.04, 0.94); }
+  35% { transform: rotate(7deg) scale(0.97, 1.05); }
+  55% { transform: rotate(-5deg) scale(1.03, 0.96); }
+  75% { transform: rotate(4deg) scale(0.98, 1.03); }
+}
+
+/* fireflies: wander in loose loops (transform) and blink (opacity) */
+.firefly {
+  position: absolute; left: var(--x); top: var(--y);
+  width: 5px; height: 5px; border-radius: 50%;
+  background: #d9f6ff;
+  box-shadow: 0 0 6px 2px rgba(127, 212, 255, 0.9), 0 0 18px 6px rgba(127, 212, 255, 0.35);
+  animation:
+    wander var(--dur) ease-in-out var(--delay) infinite,
+    blink calc(var(--dur) / 3) ease-in-out var(--delay) infinite;
+}
+.firefly:nth-child(even) { animation-direction: reverse, normal; }
+@keyframes wander {
+  0%, 100% { transform: translate(0, 0); }
+  25% { transform: translate(var(--r), calc(var(--r) * -0.6)); }
+  50% { transform: translate(calc(var(--r) * 0.3), calc(var(--r) * -1.2)); }
+  75% { transform: translate(calc(var(--r) * -0.8), calc(var(--r) * -0.4)); }
+}
+@keyframes blink {
+  0%, 100% { opacity: 0.15; }
+  40%, 60% { opacity: 1; }
 }
 
 /* ---------- Sections ---------- */
