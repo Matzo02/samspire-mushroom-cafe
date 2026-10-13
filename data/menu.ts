@@ -1,6 +1,19 @@
 // Sample menu for the demo. Replace with the cafe's real menu.
-// Each item: name, desc, price (₹), tags: "veg" | "vegan" | "jain" | "chef" | "new"
-window.MENU = [
+// Items tagged "chef" also appear in the Signatures section.
+export type Tag = "veg" | "vegan" | "jain" | "chef" | "new";
+
+export type MenuItem = { name: string; desc: string; price: number; tags: Tag[] };
+export type MenuCategory = { id: string; label: string; items: MenuItem[] };
+
+export const TAG_LABELS: Record<Tag, string> = {
+  veg: "Veg",
+  vegan: "Vegan",
+  jain: "Jain",
+  chef: "Chef's pick",
+  new: "New",
+};
+
+export const MENU: MenuCategory[] = [
   {
     id: "starters",
     label: "Small Plates",
@@ -62,3 +75,7 @@ window.MENU = [
     ],
   },
 ];
+
+export const SIGNATURES = MENU.flatMap((c) => c.items).filter((it) => it.tags.includes("chef"));
+
+export const rupee = (n: number) => "₹" + n.toLocaleString("en-IN");
