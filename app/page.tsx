@@ -149,11 +149,10 @@ export default function Home() {
               <div className="loc">
                 <h3>Baner café</h3>
                 <p>
-                  Shop No. 2, Ground Floor, Athashri Society Road,
-                  <br />
-                  Baner Gaon, Baner, Pune, Maharashtra
-                  <br />
-                  <span className="muted">Near Raichandani Alpha C</span>
+                  {SITE.cafe.lines.map((l) => (
+                    <span key={l}>{l}<br /></span>
+                  ))}
+                  <span className="muted">{SITE.cafe.landmark}</span>
                 </p>
                 <p>
                   <strong>Open till {SITE.closesAt}</strong> · Free Wi-Fi
@@ -162,9 +161,10 @@ export default function Home() {
               <div className="loc">
                 <h3>Pawna</h3>
                 <p>
-                  Pawana Dam Road, Maval, Pune
-                  <br />
-                  <span className="muted">Where our mushrooms are grown</span>
+                  {SITE.farm.lines.map((l) => (
+                    <span key={l}>{l}<br /></span>
+                  ))}
+                  <span className="muted">{SITE.farm.note}</span>
                 </p>
               </div>
               <div className="visit__cta">
@@ -193,7 +193,7 @@ export default function Home() {
         <div className="wrap footer__inner">
           <div className="brand brand--footer">
             <Mushroom className="brand__mark" />
-            <span>Samspire · The Mushroom Café™</span>
+            <span>{SITE.fullName}™</span>
           </div>
           <p className="muted">
             Baner &amp; Pawna, Pune · <a href={SITE.instagram} target="_blank" rel="noopener">Instagram</a>

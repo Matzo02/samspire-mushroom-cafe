@@ -24,6 +24,7 @@ data/site.ts        links, address details, hours
 npm install
 npm run dev        # http://localhost:3000
 npm run build      # static export to out/
+npm run preview    # build + serve out/ locally
 ```
 
 ## Updating the menu

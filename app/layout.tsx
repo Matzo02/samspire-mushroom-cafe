@@ -1,16 +1,17 @@
 import type { Metadata, Viewport } from "next";
 import { Fraunces, Inter } from "next/font/google";
+import { SITE } from "@/data/site";
 import "./globals.css";
 
-const fraunces = Fraunces({ subsets: ["latin"], axes: ["opsz"], variable: "--font-serif", display: "swap" });
-const inter = Inter({ subsets: ["latin"], variable: "--font-sans", display: "swap" });
+const fraunces = Fraunces({ subsets: ["latin"], axes: ["opsz"], variable: "--font-serif" });
+const inter = Inter({ subsets: ["latin"], variable: "--font-sans" });
 
 export const metadata: Metadata = {
-  title: "Samspire · The Mushroom Café, Baner",
+  title: `${SITE.fullName}, Baner`,
   description:
     "Samspire is India's first mushroom café. Farm-fresh mushrooms from our Pawna farm, cooked into nutritious, delicious food in Baner, Pune.",
   openGraph: {
-    title: "Samspire · The Mushroom Café",
+    title: SITE.fullName,
     description: "India's first mushroom café. Farm-fresh, nutritious, delightfully delicious. Baner & Pawna, Pune.",
     type: "website",
   },
