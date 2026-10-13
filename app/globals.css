@@ -65,28 +65,26 @@ p { margin: 0; }
 .wrap { width: min(1120px, 100% - 2 * var(--gutter)); margin-inline: auto; }
 .muted { color: var(--muted); }
 
-/* ---------- Buttons: clean pills with a mushroom mark ---------- */
+/* ---------- Buttons: square-cornered, editorial ---------- */
 .btn {
-  display: inline-flex; align-items: center; gap: 0.55em;
-  padding: 0.8em 1.4em;
-  border-radius: 999px;
-  background: var(--accent); color: #fff;
-  text-decoration: none; font-weight: 600; font-size: 0.95rem;
-  border: 1px solid var(--accent);
-  transition: background 0.2s, box-shadow 0.2s, border-color 0.2s;
+  display: inline-flex; align-items: center;
+  padding: 1em 1.6em;
+  border-radius: 2px;
+  background: var(--text); color: var(--bg);
+  text-decoration: none; font-weight: 600; font-size: 0.78rem;
+  letter-spacing: 0.14em; text-transform: uppercase;
+  border: 1px solid var(--text);
+  transition: background 0.2s, color 0.2s, border-color 0.2s;
 }
-.btn::before {
-  content: ""; width: 1.05em; height: 1.05em; flex: none;
-  background: currentColor;
-  -webkit-mask: var(--shroom) center / contain no-repeat; mask: var(--shroom) center / contain no-repeat;
-  transition: transform 0.3s ease;
-}
-.btn:hover { background: var(--accent-dark); box-shadow: 0 0 24px rgba(59, 123, 255, 0.45); }
-.btn:hover::before { transform: rotate(-14deg); }
+.btn:hover { background: var(--glow); border-color: var(--glow); }
 .btn:focus-visible { outline: 2px solid var(--glow); outline-offset: 3px; }
-.btn--ghost { background: transparent; color: var(--text); border-color: var(--line); }
-.btn--ghost:hover { background: rgba(127, 212, 255, 0.06); border-color: var(--glow); box-shadow: none; }
-.btn--small { padding: 0.55em 1.1em; font-size: 0.88rem; }
+/* secondary action: an underlined text link, not a second box */
+.btn--ghost {
+  padding-inline: 0; background: none; border-color: transparent; color: var(--text);
+  text-decoration: underline; text-decoration-color: var(--muted); text-underline-offset: 6px;
+}
+.btn--ghost:hover { background: none; border-color: transparent; color: var(--glow); text-decoration-color: var(--glow); }
+.btn--small { padding: 0.7em 1.2em; font-size: 0.72rem; }
 
 /* ---------- Nav ---------- */
 .nav {
@@ -112,7 +110,7 @@ p { margin: 0; }
 .hero { padding: clamp(64px, 10vw, 128px) 0 var(--space); }
 .hero__grid { display: grid; grid-template-columns: 1.15fr 0.85fr; gap: 56px; align-items: center; }
 .lede { font-size: clamp(1.05rem, 1.5vw, 1.2rem); color: var(--muted); max-width: 36ch; margin-top: 24px; }
-.hero__cta { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 36px; }
+.hero__cta { display: flex; flex-wrap: wrap; align-items: center; gap: 12px 32px; margin-top: 36px; }
 .hero__meta { font-size: 0.88rem; color: var(--muted); margin-top: 28px; }
 
 .hero__art { position: relative; aspect-ratio: 1; width: 100%; max-width: 440px; justify-self: center; }
@@ -206,7 +204,7 @@ p { margin: 0; }
 .loc h3 { margin-bottom: 8px; }
 .loc p { color: #c3cde6; }
 .loc p + p { margin-top: 8px; }
-.visit__cta { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 32px; }
+.visit__cta { display: flex; flex-wrap: wrap; align-items: center; gap: 12px 32px; margin-top: 32px; }
 .visit__map { border-radius: var(--radius); overflow: hidden; min-height: 380px; background: var(--bg-2); border: 1px solid var(--line); }
 /* night-mode map to match the page */
 .visit__map iframe { width: 100%; height: 100%; min-height: 380px; border: 0; filter: invert(0.92) hue-rotate(180deg) saturate(0.6) brightness(0.9); }
