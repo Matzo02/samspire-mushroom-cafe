@@ -135,31 +135,20 @@ p { margin: 0; }
   75% { transform: rotate(4deg) scale(0.98, 1.03); }
 }
 
-/* fireflies: the outer span makes the wide, slow flight; the inner light adds
-   a quick jitter and a neon pulse. Two loops layered = a curvy, insect-like path. */
+/* fireflies: the outer span makes the wide, slow flight; the inner dot adds a
+   quick jitter and a soft fade. Two loops layered = a curvy, insect-like path. */
 .firefly {
   position: absolute; left: var(--x); top: var(--y); width: 0; height: 0;
   animation: fly var(--dur) ease-in-out var(--delay) infinite alternate;
 }
 .firefly:nth-child(even) { animation-direction: alternate-reverse; }
 .firefly__light {
-  position: absolute; width: 6px; height: 6px; margin: -3px; border-radius: 50%;
-  background: #fff;
-  box-shadow:
-    0 0 2px 1px #fff,
-    0 0 8px 3px var(--c),
-    0 0 22px 8px color-mix(in srgb, var(--c) 60%, transparent),
-    0 0 44px 16px color-mix(in srgb, var(--c) 22%, transparent);
+  position: absolute; width: 4px; height: 4px; margin: -2px; border-radius: 50%;
+  background: #e6f6ff;
+  box-shadow: 0 0 6px 2px rgba(127, 212, 255, 0.55);
   animation:
     jitter 1.6s ease-in-out infinite alternate,
     pulse calc(var(--dur) / 3) ease-in-out var(--delay) infinite;
-}
-/* the pool of light each firefly throws on whatever it passes */
-.firefly__light::before {
-  content: ""; position: absolute; left: 50%; top: 50%;
-  width: 120px; height: 120px; margin: -60px; border-radius: 50%;
-  background: radial-gradient(circle, color-mix(in srgb, var(--c) 30%, transparent), transparent 62%);
-  mix-blend-mode: screen; pointer-events: none;
 }
 @keyframes fly {
   0% { transform: translate(0, 0); }
@@ -176,8 +165,8 @@ p { margin: 0; }
   100% { translate: 5px 3px; }
 }
 @keyframes pulse {
-  0%, 100% { opacity: 0.12; scale: 0.6; }
-  40%, 55% { opacity: 1; scale: 1.15; }
+  0%, 100% { opacity: 0.25; }
+  45%, 55% { opacity: 0.9; }
 }
 
 /* ---------- Sections ---------- */

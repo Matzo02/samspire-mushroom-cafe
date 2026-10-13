@@ -4,8 +4,6 @@ import { MenuTabs } from "@/components/MenuTabs";
 import { SporeBurst } from "@/components/Spores";
 import { SITE } from "@/data/site";
 
-const NEON = ["#3ff6ff", "#4f7dff", "#4dffc3", "#a77bff"];
-
 // [left %, top %, flight radius px, flight seconds, delay seconds], spread around the mushrooms
 const FIREFLIES: [number, number, number, number, number][] = [
   [14, 58, 70, 9, 0], [30, 74, 55, 7, -2], [8, 84, 60, 11, -4],
@@ -43,7 +41,7 @@ export default function Home() {
                 <span
                   key={i}
                   className="firefly"
-                  style={{ "--x": `${x}%`, "--y": `${y}%`, "--r": `${r}px`, "--dur": `${dur}s`, "--delay": `${delay}s`, "--c": NEON[i % NEON.length] } as React.CSSProperties}
+                  style={{ "--x": `${x}%`, "--y": `${y}%`, "--r": `${r}px`, "--dur": `${dur}s`, "--delay": `${delay}s` } as React.CSSProperties}
                 >
                   <span className="firefly__light" />
                 </span>
