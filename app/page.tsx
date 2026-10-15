@@ -2,6 +2,7 @@ import { Mushroom } from "@/components/Mushroom";
 import { Nav } from "@/components/Nav";
 import { MenuTabs } from "@/components/MenuTabs";
 import { SporeBurst } from "@/components/Spores";
+import { HeroScene } from "@/components/HeroScene";
 import { SITE } from "@/data/site";
 
 // [left %, top %, flight radius px, flight seconds, delay seconds], spread around the mushrooms
@@ -17,35 +18,39 @@ export default function Home() {
       <Nav />
       <main>
         <section className="hero">
-          <div className="wrap hero__grid">
-            <div className="hero__copy">
-              <h1>India&apos;s first mushroom café.</h1>
-              <p className="lede">
-                Grown on our farm near Pawna, picked fresh and cooked into food that&apos;s nutritious and delightfully
-                delicious.
-              </p>
-              <div className="hero__cta">
-                <a className="btn" href="#menu">See the menu</a>
-                <a className="btn btn--ghost" href={SITE.dineout} target="_blank" rel="noopener">Book a table</a>
+          <div className="hero__stage">
+            <HeroScene />
+            <div className="wrap hero__grid">
+              <div className="hero__copy">
+                <h1>India&apos;s first mushroom café.</h1>
+                <p className="lede">
+                  Grown on our farm near Pawna, picked fresh and cooked into food that&apos;s nutritious and delightfully
+                  delicious.
+                </p>
+                <div className="hero__cta">
+                  <a className="btn" href="#menu">See the menu</a>
+                  <a className="btn btn--ghost" href={SITE.dineout} target="_blank" rel="noopener">Book a table</a>
+                </div>
+                <p className="hero__meta">
+                  Baner, Pune · Open till {SITE.closesAt} · 4.9 on Swiggy Dineout
+                </p>
               </div>
-              <p className="hero__meta">
-                Baner, Pune · Open till {SITE.closesAt} · 4.9 on Swiggy Dineout
-              </p>
-            </div>
-            <div className="hero__art" aria-hidden="true">
-              <Mushroom className="shroom shroom--big" />
-              <Mushroom className="shroom shroom--mid" variant="bell" />
-              <Mushroom className="shroom shroom--small" variant="flat" />
-              <Mushroom className="shroom shroom--tiny" variant="button" />
-              {FIREFLIES.map(([x, y, r, dur, delay], i) => (
-                <span
-                  key={i}
-                  className="firefly"
-                  style={{ "--x": `${x}%`, "--y": `${y}%`, "--r": `${r}px`, "--dur": `${dur}s`, "--delay": `${delay}s` } as React.CSSProperties}
-                >
-                  <span className="firefly__light" />
-                </span>
-              ))}
+              <div className="hero__art" aria-hidden="true">
+                <Mushroom className="shroom shroom--big" />
+                <Mushroom className="shroom shroom--mid" variant="bell" />
+                <Mushroom className="shroom shroom--small" variant="flat" />
+                <Mushroom className="shroom shroom--tiny" variant="button" />
+                {FIREFLIES.map(([x, y, r, dur, delay], i) => (
+                  <span
+                    key={i}
+                    className="firefly"
+                    style={{ "--x": `${x}%`, "--y": `${y}%`, "--r": `${r}px`, "--dur": `${dur}s`, "--delay": `${delay}s` } as React.CSSProperties}
+                  >
+                    <span className="firefly__light" />
+                  </span>
+                ))}
+                <p className="hero__note" />
+              </div>
             </div>
           </div>
         </section>

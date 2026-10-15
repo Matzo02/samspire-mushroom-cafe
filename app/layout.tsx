@@ -17,12 +17,21 @@ export const metadata: Metadata = {
   },
 };
 
+// Turn on the scroll-driven 3D hero before first paint (so the layout doesn't jump),
+// but only if WebGL works and the visitor hasn't asked for reduced motion.
+// `?motion` in the URL forces it on for demos.
+const MOTION_CHECK = `try{if(/[?&]motion/.test(location.search)||!matchMedia("(prefers-reduced-motion: reduce)").matches){var g=document.createElement("canvas").getContext("webgl2");if(g){document.documentElement.classList.add("motion");var x=g.getExtension("WEBGL_lose_context");x&&x.loseContext()}}}catch(e){}`;
+
 export const viewport: Viewport = { themeColor: "#070d22" };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className={`${fraunces.variable} ${inter.variable}`}>
-      <body>{children}</body>
+    // the inline script adds `.motion` before first paint, so React must accept the changed class
+    <html lang="en" className={`${fraunces.variable} ${inter.variable}`} suppressHydrationWarning>
+      <body>
+        <script dangerouslySetInnerHTML={{ __html: MOTION_CHECK }} />
+        {children}
+      </body>
     </html>
   );
 }

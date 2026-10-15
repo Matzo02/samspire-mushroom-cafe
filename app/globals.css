@@ -169,6 +169,34 @@ p { margin: 0; }
   45%, 55% { opacity: 0.9; }
 }
 
+/* ---------- Scroll-driven 3D hero ----------
+   `.motion` is set before first paint when WebGL works and motion is welcome.
+   The hero gets tall and its stage sticks, so scrolling grows the mushroom
+   before the page moves on. `.is-live` arrives with the first rendered frame. */
+.hero__canvas, .hero__note { display: none; }
+.motion .hero { height: 240svh; padding: 0; margin-top: -68px; }
+.motion .hero__stage {
+  position: sticky; top: 0; height: 100svh; overflow: hidden;
+  display: flex; align-items: center; padding-top: 68px;
+}
+.motion .hero__canvas {
+  display: block; position: absolute; inset: 0; width: 100%; height: 100%;
+  pointer-events: none; opacity: 0; transition: opacity 1.2s ease;
+  /* the forest floor fades out before it reaches the copy */
+  -webkit-mask-image: linear-gradient(to right, transparent 30%, #000 58%);
+  mask-image: linear-gradient(to right, transparent 30%, #000 58%);
+}
+.motion .hero__grid { position: relative; }
+.motion .hero__art { max-width: none; aspect-ratio: auto; height: min(78svh, 640px); }
+.hero__art > * { transition: opacity 0.6s ease; }
+.is-live .hero__canvas { opacity: 1; }
+.is-live .hero__art::before, .is-live .shroom, .is-live .firefly { opacity: 0; animation: none; }
+.is-live .hero__note {
+  display: block; position: absolute; left: 0; right: 0; bottom: 0; margin: 0;
+  text-align: center; font: italic 400 0.98rem var(--serif); color: var(--muted);
+  transition: opacity 0.25s ease;
+}
+
 /* ---------- Sections ---------- */
 .section { padding-bottom: var(--space); }
 .section__head {
@@ -260,6 +288,14 @@ p { margin: 0; }
   .hero__grid, .about, .visit { grid-template-columns: 1fr; }
   .hero__art { max-width: 300px; order: -1; }
   .menu__list { grid-template-columns: 1fr; }
+  .motion .hero__grid { gap: 8px; }
+  .motion .hero__art { height: clamp(220px, 42svh, 420px); }
+  .motion .hero__canvas {
+    -webkit-mask-image: linear-gradient(to bottom, #000 50%, transparent 78%);
+    mask-image: linear-gradient(to bottom, #000 50%, transparent 78%);
+  }
+  .motion .hero__cta { margin-top: 24px; }
+  .motion .hero__meta { margin-top: 16px; }
 }
 @media (max-width: 760px) {
   .nav__toggle { display: block; }
